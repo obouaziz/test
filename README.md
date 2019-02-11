@@ -1,8 +1,8 @@
 # test
 
-Implementation of corrected two sample tests. A corrected version of the Pearson and Kendall correlation tests, 
- the Mann-Whitney (Wilcoxon) rank sum test, the Mann-Whitney (Wilcoxon) signed rank test and the Fisher variance test are implemented.
- The package also proposes a test for the median. All these corrected tests are asymptotically calibrated meaning that
+Implementation of corrected two sample tests: corrections for the Pearson and Kendall correlation tests, 
+ the Mann-Whitney (Wilcoxon) rank sum test, the Mann-Whitney (Wilcoxon) signed rank test and the Fisher variance test.
+ The package also proposes a test for the median. All these tests are asymptotically calibrated meaning that
 the probability of rejection under the null hypothesis is asymptotically equal to 5%.
 
 For the moment the package only contains the function:
