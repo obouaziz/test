@@ -7,5 +7,5 @@ the probability of rejection under the null hypothesis is asymptotically equal t
 
 For the moment the package only contains the function:
 
-- \code{cortest} that implements the corrected Pearson and Kendall's tests.
-- \code{wilcoxtest} that implements the corrected version of the Wilcoxon (Mann-Whitney) test for two independent samples and for two paired samples.
+- `cortest` that implements the corrected Pearson and Kendall's tests.
+- `wilcoxtest` that implements the corrected version of the Wilcoxon (Mann-Whitney) test for two independent samples and for two paired samples.
