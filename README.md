@@ -1,5 +1,5 @@
 # test
-Corrected versions of standard two sample tests
+
 Implementation of corrected two sample tests. A corrected version of the Pearson and Kendall correlation tests, 
  the Mann-Whitney (Wilcoxon) rank sum test, the Mann-Whitney (Wilcoxon) signed rank test and the Fisher variance test are implemented.
  The package also proposes a test for the median. All these corrected tests are asymptotically calibrated meaning that
