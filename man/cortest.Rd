@@ -4,28 +4,56 @@
 \alias{cortest}
 \title{Calibrated tests for correlation between paired samples}
 \usage{
-cortest(x, y, ...)
+cortest(x, y, alternative = "two.sided", method = "pearson",
+  ties.break = "none", conf.level = 0.95)
 }
 \arguments{
 \item{x, y}{the two continuous variables. Must be of same length.}
 
 \item{alternative}{indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".}
 
-\item{method}{a character string indicating which test to implement. Can be \code{"pearson"} or \code{"kendall"}.}
+\item{method}{a character string indicating which test to implement. Can be \code{"pearson"}, \code{"kendall"} or \code{"spearman"}.}
+
+\item{ties.break}{the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.}
+
+\item{conf.level}{confidence level for the confidence interval.}
 }
 \value{
-Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of the Pearson correlation coefficient
-or Kendall's tau.
+Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of the Pearson correlation coefficient,
+Kendall's tau or Spearman's rho.
 }
 \description{
-Tests the association/correlation for continuous paired samples using corrected versions of the Pearson correlation test and Kendall tau test. These two tests are asymptotically calibrated.
+Tests the association/correlation for continuous paired samples using corrected versions of the Pearson's correlation test, Kendall's tau test and Spearman's rho test. These three tests are asymptotically calibrated.
 }
 \details{
-Two tests are implemented. The null hypothesis for the corrected Pearson test is: H0 Cor(X,Y)=0 where Cor represents the Pearson correlation coefficient.
-The alternative is specified by the \code{alternative} argument. The null hypothesis for the corrected Kendall test is: H0 tau=0 where rho represents the Kendall's tau coefficient.
-Both tests are asymptotically calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to 5\%.
+Three tests are implemented. The null hypothesis for the corrected Pearson test is: H0 Cor(X,Y)=0 where Cor represents the Pearson correlation coefficient.
+The alternative is specified by the \code{alternative} argument. The null hypothesis for the corrected Kendall test is: H0 tau=0 where tau represents the Kendall's tau coefficient.
+The null hypothesis for the corrected Spearman test is: H0 rho=0 where rho represents the Spearman's rho coefficient.
+All tests are asymptotically calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
+}
+\note{
+The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
+For Kendall test only the ties inside each vector are broken. For Spearman test only ties between the two vectors are broken.
 }
 \examples{
+#Application on the Evans dataset
+#Description of this dataset is available in the lbreg package
+with(Evans,cor.test(CHL[CDH==1],DBP[CDH==1]))
+with(Evans,cortest(CHL[CDH==1],DBP[CDH==1]))
+#The pvalues are very different!
+
+with(Evans,cortest(CHL[CDH==1],DBP[CDH==1],method="kendall",ties.break="random"))
+with(Evans,cortest(CHL[CDH==1],DBP[CDH==1],method="spearman",ties.break="random"))
+
+#We use the function tiebreak to remove ties and compare the results from cor.test with cortest
+X=tiebreak(Evans$CHL[Evans$CDH==1])
+Y=tiebreak(Evans$DBP[Evans$CDH==1])
+cor.test(X,Y,method="kendall")
+cortest(X,Y,method="kendall")
+cor.test(X,Y,method="spearman")
+cortest(X,Y,method="spearman")
+
+#Simulated data
 n=100
 M=10000 #number of replications
 testone=function(n){
@@ -42,8 +70,8 @@ result=testone(n)
 res1[i]=result$test1
 res2[i]=result$test2
 }
-mean(res1<0.05)  #0.0549
-mean(res2<0.05)  #0.37
+mean(res1<0.05)  #0.0495
+mean(res2<0.05)  #0.3674
 
 #Replications with Kendall test (takes long time to run)
 M=1000
@@ -69,4 +97,9 @@ mean(res2<0.05)  #0.346
 #mean(res4<0.05) #0.154
 
 }
+\seealso{
+Other test functions: \code{\link{mediantest}},
+  \code{\link{vartest}}, \code{\link{wilcoxtest}}
+}
+\concept{test functions}
 \keyword{test}
