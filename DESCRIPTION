@@ -4,9 +4,9 @@ Title: Calibrated correlation, two samples tests
 Version: 0.1.0
 Author: Olivier Bouaziz
 Maintainer: Olivier Bouazizr <olivier.bouazizf@parisdecartes.fr>
-Description: Implementation of corrected two sample tests. A corrected version of the Pearson and Kendall correlation tests, 
- the Mann-Whitney (Wilcoxon) rank sum test, the Mann-Whitney (Wilcoxon) signed rank test and the Fisher variance test are implemented.
- The package also proposes a test for the median. All these corrected tests are asymptotically calibrated meaning that
+Description: Implementation of corrected two sample tests. A corrected version of the Pearson, Kendall and Spearman correlation tests, 
+ the Mann-Whitney (Wilcoxon) rank sum test, the Mann-Whitney (Wilcoxon) signed rank test and a variance test are implemented.
+ The package also proposes a test for the median and a confidence interval for the median. All these corrected tests are asymptotically calibrated meaning that
  the probability of rejection under the null hypothesis is asymptotically equal to 5%.
 License: GPL-3
 Encoding: UTF-8
