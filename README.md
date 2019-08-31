@@ -14,4 +14,4 @@ The package contains the functions:
 - `medianCI` that produces a confidence interval for the median based on the rank statistic.
 - `tiebreak` which randomly breaks ties in vectors, either inside the vector or between two vectors.
 
-The dataset `Evans` can also be loaded from the test package. A description of this dataset can be found in the *lbreg* package.
+The dataset `Evans` can also be loaded from the **test** package. A description of this dataset can be found in the **lbreg** package.
