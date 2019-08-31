@@ -5,13 +5,13 @@
 #' @param alternative indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".
 #' @param method a character string indicating which test to implement. Can be \code{"pearson"}, \code{"kendall"} or \code{"spearman"}.
 #' @param ties.break the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.
-#' @param conf.level confidence level for the confidence interval.
+#' @param conf.level confidence level for the confidence interval of the correlation coefficient. It is used only for the Pearson's correlation test.
 #' @details Three tests are implemented. The null hypothesis for the corrected Pearson test is: H0 Cor(X,Y)=0 where Cor represents the Pearson correlation coefficient.
 #' The alternative is specified by the \code{alternative} argument. The null hypothesis for the corrected Kendall test is: H0 tau=0 where tau represents the Kendall's tau coefficient.
 #' The null hypothesis for the corrected Spearman test is: H0 rho=0 where rho represents the Spearman's rho coefficient.
 #' All tests are asymptotically calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
 #' @return Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of the Pearson correlation coefficient,
-#' Kendall's tau or Spearman's rho.
+#' Kendall's tau or Spearman's rho. For the Pearson's correlation test an asymptotic confidence interval for the correlation coefficient is also returned.
 #' @note The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
 #' For Kendall test only the ties inside each vector are broken. For Spearman test only ties between the two vectors are broken.
 #' @keywords test
@@ -78,7 +78,6 @@
 #' mean(res2<0.05)  #0.346
 #' #mean(res3<0.05) #0.044
 #' #mean(res4<0.05) #0.154
-#'
 
 cortest <- function(x,y,alternative="two.sided",method="pearson",ties.break="none",conf.level=0.95) {UseMethod("cortest")}
 #' @export
@@ -99,17 +98,33 @@ cortest.default=function(X,Y,alternative="two.sided",method="pearson",ties.break
   Tn <- num/deno#sqrt(sum(R^2))
   cor_denom<-sqrt(sum(X_cent^2)*sum(Y_cent^2))
   estimate=num/cor_denom
+  #Construction of CI using the delta-method
+  C11=var(X_cent*Y_cent)
+  C22=var(X_cent^2)
+  C33=var(Y_cent^2)
+  C12=cov(X_cent^2,X_cent*Y_cent)
+  C13=cov(Y_cent^2,X_cent*Y_cent)
+  C23=cov(Y_cent^2,X_cent^2)
+  Vx=var(X)
+  Vy=var(Y)
+  varlim=C11/(Vx*Vy)+C22*estimate^2/(4*Vx^3*Vy)+C33*estimate^2/(4*Vy^3*Vx)-C12*estimate/(Vx^2*Vy)-C13*estimate/(Vx*Vy^2)+C23*estimate^2/(2*Vx^2*Vy^2)
   if (alternative=="two.sided" | alternative=="t"){
   Pval <- 2*(1-pt(abs(Tn),n-2))
-  CIl <- (-qt(1-alpha/2,n-2)*deno+num)/cor_denom
-  CIr <- (qt(1-alpha/2,n-2)*deno+num)/cor_denom}
+  CIl <- estimate-qt(1-alpha/2,n-2)*sqrt(varlim/n)
+  CIr <- estimate+qt(1-alpha/2,n-2)*sqrt(varlim/n)
+  }
+  #CIl <- (-qt(1-alpha/2,n-2)*deno+num)/cor_denom #does not work!!!
+  #CIr <- (qt(1-alpha/2,n-2)*deno+num)/cor_denom} #does not work!!!
   if (alternative=="less"| alternative=="l"){
     Pval <- pt(Tn,n-2)
     CIl <- -1
-    CIr <- (qt(1-alpha,n-2)*deno+num)/cor_denom}
+    CIr <- estimate+qt(1-alpha,n-2)*sqrt(varlim/n)
+    # CIr <- (qt(1-alpha,n-2)*deno+num)/cor_denom #does not work!!!
+    }
   if (alternative=="greater"| alternative=="g"){
     Pval <- 1-pt(Tn,n-2)
-    CIl <- (qt(alpha,n-2)*deno+num)/cor_denom
+    CIl <- estimate-qt(1-alpha,n-2)*sqrt(varlim/n)
+    #CIl <- (qt(alpha,n-2)*deno+num)/cor_denom #does not work!!!
     CIr <- 1}
   }
   if (method=="kendall"){
@@ -237,7 +252,7 @@ print.test <- function(x, ...)
     if (x$alternative=="greater" | x$alternative=="g"){
       cat("alternative hypothesis: true correlation is greater than 0\n")
     }
-    cat(paste(x$conf.level," % percent confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+    cat(paste(x$conf.level," % confidence interval for the correlation coefficient:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
     cat("sample estimates:\n")
     print(corval)
     }

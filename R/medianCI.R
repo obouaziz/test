@@ -69,13 +69,13 @@ print.medianCI <- function(x, ...)
   names(medval)<-"median"
   if (x$pairedTest==FALSE){
     cat("\nConfidence interval for the median\n\n")
-    cat(paste(x$conf.level," % percent confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+    cat(paste(x$conf.level," % confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
     cat("median estimate:\n")
     print(medval)
   }
   if (x$pairedTest==TRUE){
     cat("\nConfidence interval for the median of the difference\n\n")
-    cat(paste(x$conf.level," % percent confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+    cat(paste(x$conf.level," % confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
     cat("median estimate:\n")
     print(medval)
   }

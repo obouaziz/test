@@ -16,11 +16,11 @@ cortest(x, y, alternative = "two.sided", method = "pearson",
 
 \item{ties.break}{the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.}
 
-\item{conf.level}{confidence level for the confidence interval.}
+\item{conf.level}{confidence level for the confidence interval of the correlation coefficient. It is used only for the Pearson's correlation test.}
 }
 \value{
 Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of the Pearson correlation coefficient,
-Kendall's tau or Spearman's rho.
+Kendall's tau or Spearman's rho. For the Pearson's correlation test an asymptotic confidence interval for the correlation coefficient is also returned.
 }
 \description{
 Tests the association/correlation for continuous paired samples using corrected versions of the Pearson's correlation test, Kendall's tau test and Spearman's rho test. These three tests are asymptotically calibrated.
@@ -95,7 +95,6 @@ mean(res1<0.05)  #0.039
 mean(res2<0.05)  #0.346
 #mean(res3<0.05) #0.044
 #mean(res4<0.05) #0.154
-
 }
 \seealso{
 Other test functions: \code{\link{mediantest}},
