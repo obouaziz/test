@@ -5,7 +5,7 @@ Implementation of corrected two sample tests: corrections for the Pearson, Kenda
  The package also proposes a test for the median based on a kernel estimator of the density and a confidence interval for the median based on rank statistics. All the tests are asymptotically calibrated meaning that
 the probability of rejection under the null hypothesis is asymptotically equal to 5%.
 
-The package only contains the functions:
+The package contains the functions:
 
 - `cortest` that implements the corrected Pearson, Kendall's and Spearman's tests.
 - `wilcoxtest` that implements the corrected version of the Wilcoxon (Mann-Whitney) test for two independent samples and for two paired samples.
@@ -13,3 +13,5 @@ The package only contains the functions:
 - `mediantest` that implements a median test based on a kernel estimator of the density at 0.
 - `medianCI` that produces a confidence interval for the median based on the rank statistic.
 - `tiebreak` which randomly breaks ties in vectors, either inside the vector or between two vectors.
+
+The dataset `Evans` can also be loaded from the test package. A description of this dataset can be found in the lbreg package.
