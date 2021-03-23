@@ -4,8 +4,14 @@
 \alias{cortest}
 \title{Calibrated tests for correlation between paired samples}
 \usage{
-cortest(x, y, alternative = "two.sided", method = "pearson",
-  ties.break = "none", conf.level = 0.95)
+cortest(
+  x,
+  y,
+  alternative = "two.sided",
+  method = "pearson",
+  ties.break = "none",
+  conf.level = 0.95
+)
 }
 \arguments{
 \item{x, y}{the two continuous variables. Must be of same length.}
@@ -97,8 +103,6 @@ mean(res2<0.05)  #0.346
 #mean(res4<0.05) #0.154
 }
 \seealso{
-Other test functions: \code{\link{mediantest}},
-  \code{\link{vartest}}, \code{\link{wilcoxtest}}
+\code{\link{vartest}}, \code{\link{robustest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
 }
-\concept{test functions}
 \keyword{test}

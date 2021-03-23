@@ -86,8 +86,6 @@ mean(res1<0.05) #0.054
 mean(res2<0.05) #0.074
 }
 \seealso{
-Other test functions: \code{\link{cortest}},
-  \code{\link{mediantest}}, \code{\link{vartest}}
+\code{\link{cortest}}, \code{\link{robustest}}, \code{\link{mediantest}}, \code{\link{vartest}}.
 }
-\concept{test functions}
 \keyword{test}

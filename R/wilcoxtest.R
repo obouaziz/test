@@ -20,7 +20,7 @@
 #' vector \code{x-y} (or in the \code{x} vector in case \code{y=NULL}) are randomly broken.
 #' @return Returns the result of the test with its corresponding p-value and the value of the test statistic.
 #' @keywords test
-#' @family test functions
+#' @seealso \code{\link{cortest}}, \code{\link{robustest}}, \code{\link{mediantest}}, \code{\link{vartest}}.
 #' @export
 #' @examples
 #' #Application on the Evans dataset

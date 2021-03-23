@@ -16,7 +16,7 @@
 #' one vector equal to the difference between \code{x} and \code{y}.
 #' @return Returns the result of the test with its corresponding p-value and the value of the test statistic.
 #' @keywords test
-#' @family test functions
+#' @seealso \code{\link{cortest}}, \code{\link{robustest}}, \code{\link{vartest}}, \code{\link{wilcoxtest}}.
 #' @export
 #' @examples
 #' #Simulations

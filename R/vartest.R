@@ -12,7 +12,7 @@
 #' @note The function can also be called using formulas: type \code{vartest(x~y,data)} with x the quantitative variable
 #' and y a factor variable with two or more levels. For more than two groups, only the formula is valid.
 #' @keywords test
-#' @family test functions
+#' @seealso \code{\link{cortest}}, \code{\link{robustest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
 #' @export
 #' @examples
 #' #Application on the Evans dataset

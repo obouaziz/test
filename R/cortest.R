@@ -15,7 +15,7 @@
 #' @note The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
 #' For Kendall test only the ties inside each vector are broken. For Spearman test only ties between the two vectors are broken.
 #' @keywords test
-#' @family test functions
+#' @seealso \code{\link{vartest}}, \code{\link{robustest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
 #' @export
 #' @examples
 #' #Application on the Evans dataset
