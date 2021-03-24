@@ -1,4 +1,4 @@
-#' Simulate the test statistic for the robust independence test of Kolmogorov-Smirnov's type
+#' Simulate the distribution of the test statistic for the robust independence test of Kolmogorov-Smirnov's type
 #'
 #' For two independent continuous uniform variables on [0,1] compute the maximal distance
 #' between the joint empirical cumulative distribution function and the product of the marginal
