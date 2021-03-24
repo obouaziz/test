@@ -13,7 +13,7 @@
 #' j=1, ...,n.
 #' @note Missing values are removed such that if a value of \code{x} (resp. \code{y}) is missing then the corresponding
 #' values of both \code{x} and \code{y} are removed. The bidimensional e.c.d.f. is then computed on the remaining elements.
-#' @seealso \code{\link{robustest}}; the \code{\link{bivariate}} package also provides plots of the
+#' @seealso \code{\link{robustest}}; the \code{\link{bivariate}} package also provides plots for the
 #' bidimensional e.c.d.f.
 #' @export
 #' @examples
