@@ -30,6 +30,7 @@
 #' stat_robustest(x,y)
 #'
 #' #Application on the Evans dataset
+#' data(Evans)
 #' with(Evans,stat_robustest(CHL[CDH==1],DBP[CDH==1]))
 
 stat_robustest<-function(x,y){

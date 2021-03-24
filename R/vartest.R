@@ -16,6 +16,7 @@
 #' @export
 #' @examples
 #' #Application on the Evans dataset
+#' data(Evans)
 #' #Description of this dataset is available in the lbreg package
 #' with(Evans,var.test(CHL[CDH==0],CHL[CDH==1]))
 #' with(Evans,vartest(CHL[CDH==0],CHL[CDH==1]))

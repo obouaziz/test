@@ -20,6 +20,7 @@
 #' @examples
 #' #Application on the Evans dataset
 #' #Description of this dataset is available in the lbreg package
+#' data(Evans)
 #' with(Evans,cor.test(CHL[CDH==1],DBP[CDH==1]))
 #' with(Evans,cortest(CHL[CDH==1],DBP[CDH==1]))
 #' #The pvalues are very different!
