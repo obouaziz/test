@@ -35,6 +35,8 @@
 #' values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements.
 #' @keywords test
 #' @seealso \code{\link{cortest}}, \code{\link{vartest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
+#' @author See \emph{Distribution Free Tests of Independence Based on the Sample Distribution Function}.
+#' J. R. Blum, J. Kiefer and M. Rosenblatt, 1961.
 #' @export
 #' @examples
 #' #Simulated data 1
