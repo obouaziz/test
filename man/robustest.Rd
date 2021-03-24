@@ -75,4 +75,8 @@ with(Evans,robustest(CHL[CDH==1],DBP[CDH==1])) #the robust independence test
 \seealso{
 \code{\link{cortest}}, \code{\link{vartest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
 }
+\author{
+See the paper \emph{Distribution Free Tests of Independence Based on the Sample Distribution Function}.
+J. R. Blum, J. Kiefer and M. Rosenblatt, 1961.
+}
 \keyword{test}
