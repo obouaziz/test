@@ -3,8 +3,7 @@
 Implementation of corrected two sample tests: corrections for the Pearson, Kendall and Spearman correlation tests, 
  the Mann-Whitney (Wilcoxon) rank sum test, the Mann-Whitney (Wilcoxon) signed rank test and a variance test. 
  The package also proposes a test for the median based on a kernel estimator of the density and a confidence interval for the median based on rank statistics. All the tests are asymptotically calibrated meaning that
-the probability of rejection under the null hypothesis is asymptotically equal to 5%. The package also proposes a test for independence between two continuous variables, based on the maximum distance between the joint empirical cumulative distribution function and the product of the marginal
-empirical cumulative distribution functions is also implemented. The distribution of this test has been numerically obtained and this is also an exact test.
+the probability of rejection under the null hypothesis is asymptotically equal to 5%. The package also proposes a test for independence between two continuous variables, on the Kolmogorov-Smirnov type. This test is exact.
 
 The package contains the functions:
 
