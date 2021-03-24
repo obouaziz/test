@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulecdf.R
 \name{simulecdf}
 \alias{simulecdf}
-\title{Simulate the test statistic for the robust independence test of Kolmogorov-Smirnov's type}
+\title{Simulate the distribution of the test statistic for the robust independence test of Kolmogorov-Smirnov's type}
 \usage{
 simulecdf(n, N)
 }
