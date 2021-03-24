@@ -40,6 +40,7 @@ vector \code{x-y} (or in the \code{x} vector in case \code{y=NULL}) are randomly
 }
 \examples{
 #Application on the Evans dataset
+data(Evans)
 #Description of this dataset is available in the lbreg package
 with(Evans,wilcox.test(CHL[CDH==0],CHL[CDH==1]))
 with(Evans,wilcoxtest(CHL[CDH==0],CHL[CDH==1]))

@@ -66,6 +66,7 @@ robustest(x,y)
 
 #Application on the Evans dataset
 #Description of this dataset is available in the lbreg package
+data(Evans)
 with(Evans,plot(CHL[CDH==1],DBP[CDH==1]))
 with(Evans,cor.test(CHL[CDH==1],DBP[CDH==1])) #the standard Pearson test
 with(Evans,cortest(CHL[CDH==1],DBP[CDH==1])) #the robust Pearson test
@@ -74,6 +75,7 @@ with(Evans,robustest(CHL[CDH==1],DBP[CDH==1])) #the robust independence test
 }
 \seealso{
 \code{\link{cortest}}, \code{\link{vartest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
+See also the \code{\link{hoeffd}} function in the \code{\link{Hmisc}} package for the Hoeffding test.
 }
 \author{
 See \emph{Distribution Free Tests of Independence Based on the Sample Distribution Function}.

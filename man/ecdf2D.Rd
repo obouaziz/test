@@ -33,6 +33,7 @@ values of both \code{x} and \code{y} are removed. The bidimensional e.c.d.f. is 
 x<-c(0.2, 0.3, 0.1, 0.4)
 y<-c(0.5, 0.4, 0.05, 0.2)
 ecdf2D(x,y)
+
 #Simulated data #2
 n<-40
 x<-rnorm(n)
@@ -41,6 +42,6 @@ plot(x,y)
 ecdf2D(x,y)
 }
 \seealso{
-\code{\link{robustest}}; the \code{\link{bivariate}} package also provides plots of the
+\code{\link{robustest}}; the \code{\link{bivariate}} package also provides plots for the
 bidimensional e.c.d.f.
 }
