@@ -14,15 +14,19 @@ The result is returned as a matrix of dimension (n*n) where the entry (i,j) corr
 j=1, ...,n.
 }
 \description{
-Compute an empirical cumulative distribution function for a bivariate continuous distribution.
+Compute the empirical cumulative distribution function for a bivariate continuous distribution.
 }
 \details{
 The bidimensional e.c.d.f. (empirical cumulative distribution function) Fn is a step function with jumps i/n at observation values, where i is
-the number of tied observations at that value. What about missing values ?
+the number of tied observations at that value.
 
 For observations (x1,y1), ..., (x_n,y_n), Fn is defined as
 
-Fn(t1,t2)=#\code{{xi<=t1,yi<=t2}/n=1/n sum_{i=1}^n Indicator(xi<=t1,yi<=t2)}
+Fn(t1,t2) = #\code{{xi<=t1,yi<=t2}/n = 1/n sum_{i=1}^n Indicator(xi<=t1,yi<=t2)}
+}
+\note{
+Missing values are removed such that if a value of \code{x} (resp. \code{y}) is missing then the corresponding
+values of both \code{x} and \code{y} are removed. The bidimensional e.c.d.f. is then computed on the remaining elements.
 }
 \examples{
 #Simulated data #1
@@ -35,12 +39,8 @@ x<-rnorm(n)
 y<-x^2+0.3*rnorm(n)
 plot(x,y)
 ecdf2D(x,y)
-#Real data
 }
 \seealso{
-Other test functions: 
-\code{\link{simulecdf}()},
-\code{\link{stat_robustest}()}
+\code{\link{robustest}}; the \code{\link{bivariate}} package also provides plots of the
+bidimensional e.c.d.f.
 }
-\concept{test functions}
-\keyword{test}

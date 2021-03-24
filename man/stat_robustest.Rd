@@ -18,35 +18,32 @@ between the joint empirical cumulative distribution function and the product of 
 empirical cumulative distribution functions.
 }
 \details{
-For two continuous variables, robustest tests H0 X and Y are independent
-against H1 X and Y are not independent.
+Let (x1,y1), ..., (x_n,y_n) be a bivariate sample of \code{n} continuous variables.
+Its corresponding bivariate e.c.d.f. (empirical cumulative distribution function)
+Fn is defined as:
 
-For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
-(empirical cumulative distribution function) Fn is defined as
+Fn(t1,t2) = #\code{{xi<=t1,yi<=t2}/n = sum_{i=1}^n Indicator(xi<=t1,yi<=t2)/n}.
 
-Fn(t1,t2)=#\code{{xi<=t1,yi<=t2}/n= sum_{i=1}^n Indicator(xi<=t1,yi<=t2)/n}
+Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. The function returns the value of:
 
-Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. The test statistics is defined as:
-
-\code{n^(1/2) sup_{t1,t2} |Fn(t1,t2)-Fn(t1)*Fn(t2)|}
+\code{n^(1/2) sup_{t1,t2} |Fn(t1,t2)-Fn(t1)*Fn(t2)|}.
 }
 \examples{
 #Simulated data 1
 x<-c(0.2, 0.3, 0.1, 0.4)
 y<-c(0.5, 0.4, 0.05, 0.2)
 stat_robustest(x,y)
+
 #Simulated data 2
 n<-40
 x<-rnorm(n)
 y<-x^2+0.3*rnorm(n)
 plot(x,y)
 stat_robustest(x,y)
-#Real data
+
+#Application on the Evans dataset
+with(Evans,stat_robustest(CHL[CDH==1],DBP[CDH==1]))
 }
 \seealso{
-Other test functions: 
-\code{\link{ecdf2D}()},
-\code{\link{simulecdf}()}
+\code{\link{robustest}}, \code{\link{simulecdf}}, \code{\link{ecdf2D}}.
 }
-\concept{test functions}
-\keyword{test}

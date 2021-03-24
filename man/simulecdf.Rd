@@ -12,31 +12,26 @@ simulecdf(n, N)
 \item{N}{the number of replications in the Monte-Carlo simulation.}
 }
 \value{
-Returns the e.c.d.f. of the N Monte_Carlo simulations. The returned object
-is a stepfun object obtained from the function ecdf.
+Returns the e.c.d.f. based on the N Monte_Carlo simulations. The returned object
+is a stepfun object obtained from the function \code{ecdf}.
 }
 \description{
-For two continuous uniform variables on [0,1] compute the maximal distance
+For two independent continuous uniform variables on [0,1] compute the maximal distance
 between the joint empirical cumulative distribution function and the product of the marginal
-empirical cumulative distribution functions.
+empirical cumulative distribution functions using Monte-Carlo simulations.
 }
 \details{
-Let X and Y be two continuous uniform variables on [0,1].
+Let (x1,y1), ..., (x_n,y_n) be a bivariate sample of \code{n} independent continuous uniform variables.
+Its corresponding bivariate e.c.d.f. (empirical cumulative distribution function)
+Fn is defined as:
 
-For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
-(empirical cumulative distribution function) Fn is defined as
+Fn(t1,t2) = #\code{{xi<=t1,yi<=t2}/n = sum_{i=1}^n Indicator(xi<=t1,yi<=t2)/n}.
 
-Fn(t1,t2)=#\code{{xi<=t1,yi<=t2}/n= sum_{i=1}^n Indicator(xi<=t1,yi<=t2)/n}
+Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. Based on N Monte_Carlo simulations,
+the function computes the e.c.d.f. of
 
-Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. For the N Monte_Carlo simulations,
-the function computes
-
-\code{n^(1/2) sup_{t1,t2} |Fn(t1,t2)-Fn(t1)*Fn(t2)|}
+\code{n^(1/2) sup_{t1,t2} |Fn(t1,t2)-Fn(t1)*Fn(t2)|}.
 }
 \seealso{
-Other test functions: 
-\code{\link{ecdf2D}()},
-\code{\link{stat_robustest}()}
+\code{\link{robustest}}, \code{\link{stat_robustest}}, \code{\link{ecdf2D}}.
 }
-\concept{test functions}
-\keyword{test}
