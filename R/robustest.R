@@ -81,7 +81,7 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
   if (simu==TRUE){
     ecdf_fun<-simulecdf(n,N)
   } else {
-    e <- new.env()
+    #e <- new.env()
     #data(ecdf10.Rdata, envir=environment())#paste(ecdf,n,.Rdata,sep="")
     #load(paste("ecdf",n,".Rdata",sep=""))#Tables/
     if (3<=n & n<=150)
@@ -90,8 +90,8 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
     } else {
       if (151<=n & n<=175)
       {
-        #data(ecdf150)
-        load("ecdf150.RData", envir = e)
+        data(ecdf150)
+        #load("ecdf150.RData", envir = e)
       } else {
         if (176<=n & n<=250)
         {
