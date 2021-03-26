@@ -13,7 +13,7 @@
 #' @return Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of the Pearson correlation coefficient,
 #' Kendall's tau or Spearman's rho. For the Pearson's correlation test an asymptotic confidence interval for the correlation coefficient is also returned.
 #' @note The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
-#' For Kendall test only the ties inside each vector are broken. For Spearman test only ties between the two vectors are broken.
+#' Note that only the ties inside each vector are broken (but not ties between vectors).
 #' @keywords test
 #' @seealso \code{\link{vartest}}, \code{\link{robustest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
 #' @export
@@ -129,25 +129,34 @@ cortest.default=function(X,Y,alternative="two.sided",method="pearson",ties.break
     CIr <- 1}
   }
   if (method=="kendall"){
-    if ((length(X)!=length(unique(X)))|(length(Y)!=length(unique(Y)))) {
+    dupliX=duplicated(X)
+    nb_dupliX=sum(dupliX)
+    dupliY=duplicated(Y)
+    nb_dupliY=sum(dupliY)
+    if((nb_dupliY+nb_dupliX)!=0){
+    #if ((length(X)!=length(unique(X)))|(length(Y)!=length(unique(Y)))) {
       if (ties.break=="none") {
       warning("The data contains ties!")}
       if (ties.break=="random") {
-        Xsort=sort(X,index.return=TRUE)
-        if (sum(diff(Xsort$x)==0)>0) {
-          index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
-          X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
-        }
-        Ysort=sort(Y,index.return=TRUE)
-        if (sum(diff(Ysort$x)==0)>0) {
-          index=which(diff(Ysort$x)==0)#which value should be changed in the ordered sample
-          Y[Ysort$ix[index]]<-Y[Ysort$ix[index]]+runif(length(Ysort$ix[index]),-0.00001,0.00001)
-        }
-        #X=X+runif(length(X),-0.00001,0.00001) #break all values
-        #Y=Y+runif(length(Y),-0.00001,0.00001)
         Message=TRUE
+        if (nb_dupliX!=0){
+          X[dupliX]=X[dupliX]+runif(nb_dupliX,-0.00001,0.00001)}
+        if (nb_dupliY!=0){
+          Y[dupliY]=Y[dupliY]+runif(nb_dupliY,-0.00001,0.00001)}
       }
-    }
+        # Xsort=sort(X,index.return=TRUE)
+        # if (sum(diff(Xsort$x)==0)>0) {
+        #   index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
+        #   X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
+        # }
+        # Ysort=sort(Y,index.return=TRUE)
+        # if (sum(diff(Ysort$x)==0)>0) {
+        #   index=which(diff(Ysort$x)==0)#which value should be changed in the ordered sample
+        #   Y[Ysort$ix[index]]<-Y[Ysort$ix[index]]+runif(length(Ysort$ix[index]),-0.00001,0.00001)
+        # }
+        # #X=X+runif(length(X),-0.00001,0.00001) #break all values
+        # #Y=Y+runif(length(Y),-0.00001,0.00001)
+      }
   R <- array(0,dim=c(n,n))
   S <- array(0,dim=c(n,n))
   for(i in 1:n)
@@ -176,24 +185,35 @@ cortest.default=function(X,Y,alternative="two.sided",method="pearson",ties.break
     CIr <- 1}
   }
   if (method=="spearman"){
-    if ((length(X)!=length(unique(X)))|(length(Y)!=length(unique(Y)))) {
+    dupliX=duplicated(X)
+    nb_dupliX=sum(dupliX)
+    dupliY=duplicated(Y)
+    nb_dupliY=sum(dupliY)
+    if((nb_dupliY+nb_dupliX)!=0){
+    i#f ((length(X)!=length(unique(X)))|(length(Y)!=length(unique(Y)))) {
       if (ties.break=="none") {
         warning("The data contains ties!")}
       if (ties.break=="random") {
-        Xsort=sort(X,index.return=TRUE)
-        if (sum(diff(Xsort$x)==0)>0) {
-          index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
-          X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
-        }
-        Ysort=sort(Y,index.return=TRUE)
-        if (sum(diff(Ysort$x)==0)>0) {
-          index=which(diff(Ysort$x)==0)#which value should be changed in the ordered sample
-          Y[Ysort$ix[index]]<-Y[Ysort$ix[index]]+runif(length(Ysort$ix[index]),-0.00001,0.00001)
-        }
-        #X=X+runif(length(X),-0.00001,0.00001) #break all values
-        #Y=Y+runif(length(Y),-0.00001,0.00001)
         Message=TRUE
+        if (nb_dupliX!=0){
+          X[dupliX]=X[dupliX]+runif(nb_dupliX,-0.00001,0.00001)}
+        if (nb_dupliY!=0){
+          Y[dupliY]=Y[dupliY]+runif(nb_dupliY,-0.00001,0.00001)}
       }
+        # Xsort=sort(X,index.return=TRUE)
+        # if (sum(diff(Xsort$x)==0)>0) {
+        #   index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
+        #   X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
+        # }
+      #   Ysort=sort(Y,index.return=TRUE)
+      #   if (sum(diff(Ysort$x)==0)>0) {
+      #     index=which(diff(Ysort$x)==0)#which value should be changed in the ordered sample
+      #     Y[Ysort$ix[index]]<-Y[Ysort$ix[index]]+runif(length(Ysort$ix[index]),-0.00001,0.00001)
+      #   }
+      #   #X=X+runif(length(X),-0.00001,0.00001) #break all values
+      #   #Y=Y+runif(length(Y),-0.00001,0.00001)
+      #   Message=TRUE
+      # }
     }
     R <- array(0,dim=c(n,n,n))
     S <- array(0,dim=c(n,n,n))
