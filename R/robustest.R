@@ -80,6 +80,8 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
   if (n<3) stop("length of 'x' and 'y' must be greater than 2")
   if (simu==TRUE){
     ecdf_fun<-simulecdf(n,N)
+    Tn<-stat_robustest(X,Y)
+    Pval<-1-ecdf_fun(Tn)
   } else {
     #data(ecdf10.Rdata, envir=environment())#paste(ecdf,n,.Rdata,sep="")
     #load(paste("ecdf",n,".Rdata",sep=""))#Tables/
@@ -118,10 +120,10 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
         }
       }
     }
+    Tn<-stat_robustest(X,Y)
+    funstep<-stepfun(x1,c(0,y1))
+    Pval<-1-funstep(Tn)
   }
-  Tn<-stat_robustest(X,Y)
-  funstep<-stepfun(x1,c(0,y1))
-  Pval<-1-funstep(Tn)
   #Pval<-1-ecdf_fun(Tn)
   result <- list(statistic=Tn, p.value=Pval)
   class(result)<-"robustest"
