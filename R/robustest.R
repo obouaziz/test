@@ -8,6 +8,7 @@
 #' @param simu if TRUE a Monte-Carlo simulation with \code{N} replications is used to determine the
 #' distribution of the test statistic under the null hypothesis. If FALSE, pre computed tables are used (see Details
 #' for more information).
+#' @param ties.break the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.
 #' @details For two continuous variables, robustest tests H0 X and Y are independent
 #' against H1 X and Y are not independent.
 #'
@@ -32,7 +33,9 @@
 #' @return Returns the result of the test with its corresponding p-value and the value of the test statistic.
 #' @note Only a two sided alternative is possible with this test. Missing values are removed such that if a value
 #' of \code{x} (resp. \code{y}) is missing then the corresponding
-#' values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements.
+#' values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements. If \code{ties.break="none"} the ties are ignored, putting
+#' mass (nb of ties)/n at tied observations in the computation of the empirical cumulative distribution functions.
+#' If \code{ties.break="random"} they are randomly broken.
 #' @keywords test
 #' @seealso \code{\link{cortest}}, \code{\link{vartest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
 #' See also the \code{\link{hoeffd}} function in the \code{\link{Hmisc}} package for the Hoeffding test.
@@ -62,10 +65,11 @@
 #' #The robust tests give very different pvalues than the standard Pearson test!
 
 #' @export
-robustest <- function(x,y,N=50000,simu=FALSE) {UseMethod("robustest")}
+robustest <- function(x,y,N=50000,simu=FALSE,ties.break="none") {UseMethod("robustest")}
 #' @export
-robustest.default<-function (X,Y,N=50000,simu=FALSE){
+robustest.default<-function (X,Y,N=50000,simu=FALSE,ties.break="none"){
   if (length(X)!=length(Y)) stop("'x' and 'y' must have the same length")
+  Message=FALSE
   if (sum(is.na(X))!=0)
   {
     na.ind=which(is.na(X))
@@ -78,6 +82,21 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
   }
   n <- length(X)
   if (n<3) stop("length of 'x' and 'y' must be greater than 2")
+  dupliX=duplicated(X)
+  nb_dupliX=sum(dupliX)
+  dupliY=duplicated(Y)
+  nb_dupliY=sum(dupliY)
+  if ((nb_dupliX+nb_dupliY)!=0){
+    if (ties.break=="none") {
+      warning("The data contains ties!")}
+    if (ties.break=="random") {
+      Message=TRUE
+      if (nb_dupliX!=0){
+      X[dupliX]=X[dupliX]+runif(nb_dupliX,-0.00001,0.00001)}
+      if (nb_dupliY!=0){
+      Y[dupliY]=Y[dupliY]+runif(nb_dupliY,-0.00001,0.00001)}
+    }
+  }
   if (simu==TRUE){
     ecdf_fun<-simulecdf(n,N)
     Tn<-stat_robustest(X,Y)
@@ -125,7 +144,7 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
     Pval<-1-funstep(Tn)
   }
   #Pval<-1-ecdf_fun(Tn)
-  result <- list(statistic=Tn, p.value=Pval)
+  result <- list(statistic=Tn, p.value=Pval,message=Message)
   class(result)<-"robustest"
   return(result)
 }
@@ -134,5 +153,8 @@ print.robustest <- function(x, ...)
 {
   cat("\nRobust independence test for two continuous variables\n\n")
   cat(paste("t = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
+  if (x$message==TRUE) {
+    cat("\nTies were detected in the dataset and they were randomly broken")
+  }
 }
 
