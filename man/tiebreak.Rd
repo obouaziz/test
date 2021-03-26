@@ -21,8 +21,10 @@ to the value of all the ties but one in the vector \code{x}. If \code{y} is also
 x <- c(1,2,2,3,4,5,5,5,7)
 xbreak=tiebreak(x)
 xbreak #a uniform value has been added to the second, sixth and seventh value of x.
-length(unique(xbreak))==length(x) #check if the breaking procedure has worked.
+sum(duplicated(xbreak))#check if the breaking procedure has worked.
 y <- c(4,9,12,11,2,10)
-c(xbreak,ybreak)=tiebreak(x,y) #a uniform value has been added to the second, third and fifth value of x.
-xbreak\%in\%ybreak #check that no values for xbreak can be found in ybreak
+xy_break=tiebreak(x,y)
+xy_break$x
+xy_break$y #a uniform value has been added to the second, third and fifth value of x.
+xy_break$x\%in\%xy_break$y #check that no values for xbreak can be found in ybreak
 }

@@ -39,7 +39,7 @@ All tests are asymptotically calibrated in the sense that the rejection probabil
 }
 \note{
 The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
-For Kendall test only the ties inside each vector are broken. For Spearman test only ties between the two vectors are broken.
+Note that only the ties inside each vector are broken (but not ties between vectors).
 }
 \examples{
 #Application on the Evans dataset
