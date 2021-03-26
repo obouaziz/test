@@ -10,22 +10,26 @@
 #' x <- c(1,2,2,3,4,5,5,5,7)
 #' xbreak=tiebreak(x)
 #' xbreak #a uniform value has been added to the second, sixth and seventh value of x.
-#' length(unique(xbreak))==length(x) #check if the breaking procedure has worked.
+#' sum(duplicated(xbreak))#check if the breaking procedure has worked.
 #' y <- c(4,9,12,11,2,10)
-#' c(xbreak,ybreak)=tiebreak(x,y) #a uniform value has been added to the second, third and fifth value of x.
-#' xbreak%in%ybreak #check that no values for xbreak can be found in ybreak
+#' xy_break=tiebreak(x,y)
+#' xy_break$x
+#' xy_break$y #a uniform value has been added to the second, third and fifth value of x.
+#' xy_break$x%in%xy_break$y #check that no values for xbreak can be found in ybreak
 
 tiebreak <- function(x,y=NULL) {UseMethod("tiebreak")}
 #' @export
 tiebreak.default=function(X,Y=NULL){
   if (is.null(Y)){
-  if (length(X)==length(unique(X))) {
+    dupli=duplicated(X)
+    nb_dupli=sum(dupli)
+  if (nb_dupli==0) {
     warning("The data does not contain ties")
   } else {
-    Xsort=sort(X,index.return=TRUE)
-      index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
-      X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
-  }
+    X[dupli]=X[dupli]+runif(nb_dupli,-0.00001,0.00001)}
+    #Xsort=sort(X,index.return=TRUE)
+     # index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
+      #X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
   return(X)
   } else {
   if (is.null(X)){ stop("a value for 'x' need to be provided")}
@@ -33,7 +37,7 @@ tiebreak.default=function(X,Y=NULL){
     if (sum(ties)==0){warning("The data does not contain ties")} else {
       X[ties] <- X[ties]+runif(sum(ties),-0.00001,0.00001)
     }
-    return(list(X=X,Y=Y))
+    return(list(x=X,y=Y))
   }
 }
 
