@@ -82,15 +82,19 @@ wilcoxtest.default=function(X,Y=NULL,alternative="two.sided",ties.break="none",p
     #Perform the paired two sample test
     X <- X-Y
     n <- length(X)
-    if ((length(X)!=length(unique(X)))){
+    dupliX=duplicated(X)
+    nb_dupliX=sum(dupliX)
+    if (nb_dupliX!=0){
+    #if ((length(X)!=length(unique(X)))){
       if (ties.break=="none") {
         warning("The data contains ties!")}
       if (ties.break=="random") {
-        Xsort=sort(X,index.return=TRUE)
-        if (sum(diff(Xsort$x)==0)>0) {
-          index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
-          X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
-        }
+        X[dupliX]=X[dupliX]+runif(nb_dupliX,-0.00001,0.00001)
+        #Xsort=sort(X,index.return=TRUE)
+        #if (sum(diff(Xsort$x)==0)>0) {
+        #  index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
+        #  X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
+        #}
         Message=TRUE
       }
     }
@@ -116,15 +120,19 @@ wilcoxtest.default=function(X,Y=NULL,alternative="two.sided",ties.break="none",p
     {
     #Perform the paired two sample test with X being the difference between the variables in the same pair
     n <- length(X)
-    if ((length(X)!=length(unique(X)))){
+    #if ((length(X)!=length(unique(X)))){
+      dupliX=duplicated(X)
+      nb_dupliX=sum(dupliX)
+      if (nb_dupliX!=0){
       if (ties.break=="none") {
         warning("The data contains ties!")}
       if (ties.break=="random") {
-        Xsort=sort(X,index.return=TRUE)
-        if (sum(diff(Xsort$x)==0)>0) {
-          index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
-          X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
-        }
+        X[dupliX]=X[dupliX]+runif(nb_dupliX,-0.00001,0.00001)
+        #Xsort=sort(X,index.return=TRUE)
+        #if (sum(diff(Xsort$x)==0)>0) {
+        #  index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
+        #  X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
+        #}
       Message=TRUE
       }
     }
