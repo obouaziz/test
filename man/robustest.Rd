@@ -4,7 +4,7 @@
 \alias{robustest}
 \title{Robust independence test for two continuous variables of Kolmogorov-Smirnov's type}
 \usage{
-robustest(x, y, N = 50000, simu = FALSE)
+robustest(x, y, N = 50000, simu = FALSE, ties.break = "none")
 }
 \arguments{
 \item{x, y}{the two continuous variables. Must be of same length.}
@@ -14,6 +14,8 @@ robustest(x, y, N = 50000, simu = FALSE)
 \item{simu}{if TRUE a Monte-Carlo simulation with \code{N} replications is used to determine the
 distribution of the test statistic under the null hypothesis. If FALSE, pre computed tables are used (see Details
 for more information).}
+
+\item{ties.break}{the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.}
 }
 \value{
 Returns the result of the test with its corresponding p-value and the value of the test statistic.
@@ -49,13 +51,15 @@ For n>=751, the distribution with n=1000 is used. Those tables were computed usi
 \note{
 Only a two sided alternative is possible with this test. Missing values are removed such that if a value
 of \code{x} (resp. \code{y}) is missing then the corresponding
-values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements.
+values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements. If \code{ties.break="none"} the ties are ignored, putting
+mass (nb of ties)/n at tied observations in the computation of the empirical cumulative distribution functions.
+If \code{ties.break="random"} they are randomly broken.
 }
 \examples{
 #Simulated data 1
 x<-c(0.2, 0.3, 0.1, 0.4)
 y<-c(0.5, 0.4, 0.05, 0.2)
-stat_robustest(x,y)
+robustest(x,y)
 
 #Simulated data 2
 n<-40
