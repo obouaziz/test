@@ -120,7 +120,9 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
     }
   }
   Tn<-stat_robustest(X,Y)
-  Pval<-1-ecdf_fun(Tn)
+  funstep<-stepfun(x1,c(0,y1))
+  Pval<-1-funstep(Tn)
+  #Pval<-1-ecdf_fun(Tn)
   result <- list(statistic=Tn, p.value=Pval)
   class(result)<-"robustest"
   return(result)
