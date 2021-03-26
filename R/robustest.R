@@ -6,7 +6,7 @@
 #' @param x,y the two continuous variables. Must be of same length.
 #' @param N the number of Monte-Carlo replications if simu=TRUE.
 #' @param simu if TRUE a Monte-Carlo simulation with \code{N} replications is used to determine the
-#' distribution of the test statistic under the null. If FALSE, pre computed tables are used (see Details
+#' distribution of the test statistic under the null hypothesis. If FALSE, pre computed tables are used (see Details
 #' for more information).
 #' @details For two continuous variables, robustest tests H0 X and Y are independent
 #' against H1 X and Y are not independent.
@@ -22,7 +22,7 @@
 #'
 #'Under H0 the distribution of the test statistic is free and is equivalent to
 #'the same test statistic computed for two independent continuous uniform variables in [0,1],
-#'where the supremum is taken for t1,t2 on [0,1]. Using this result, the distribution of the test
+#'where the supremum is taken for t1,t2 in [0,1]. Using this result, the distribution of the test
 #'statistic is obtained using Monte-Carlo simulations. The user can either use the argument simu=TRUE to
 #'perform the Monte-Carlo simulation (with N the number of replications) or simply use the available tables
 #'by choosing simu=FALSE. In the latter case, the exact distribution is computed for n=1, ...,150. For 151<=n<=175, the
@@ -81,33 +81,37 @@ robustest.default<-function (X,Y,N=50000,simu=FALSE){
   if (simu==TRUE){
     ecdf_fun<-simulecdf(n,N)
   } else {
-    #e <- new.env()
     #data(ecdf10.Rdata, envir=environment())#paste(ecdf,n,.Rdata,sep="")
     #load(paste("ecdf",n,".Rdata",sep=""))#Tables/
     if (3<=n & n<=150)
     {
-      data(list=paste("ecdf",n,sep=""))
+      load(system.file(paste("data/ecdf",n,".RData",sep=""),package="test"))
+      #data(list=paste("ecdf",n,sep=""))
     } else {
       if (151<=n & n<=175)
       {
-        data(ecdf150)
-        #load("ecdf150.RData", envir = e)
+        load(system.file("data/ecdf150.RData",package="test"))
+        #data(ecdf150)
       } else {
         if (176<=n & n<=250)
         {
-          data(ecdf200)
+          load(system.file("data/ecdf200.RData",package="test"))
+          #data(ecdf200)
         } else {
           if (251<=n & n<=400)
           {
-            data(ecdf300)
+            load(system.file("data/ecdf300.RData",package="test"))
+            #data(ecdf300)
           } else {
             if (401<=n & n<=750)
             {
-              data(ecdf500)
+              load(system.file("data/ecdf500.RData",package="test"))
+              #data(ecdf500)
             } else {
               if (751<=n)
               {
-                data(ecdf1000)
+                load(system.file("data/ecdf1000.RData",package="test"))
+                #data(ecdf1000)
               }
             }
           }
