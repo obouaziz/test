@@ -12,7 +12,7 @@ robustest(x, y, N = 50000, simu = FALSE)
 \item{N}{the number of Monte-Carlo replications if simu=TRUE.}
 
 \item{simu}{if TRUE a Monte-Carlo simulation with \code{N} replications is used to determine the
-distribution of the test statistic under the null. If FALSE, pre computed tables are used (see Details
+distribution of the test statistic under the null hypothesis. If FALSE, pre computed tables are used (see Details
 for more information).}
 }
 \value{
@@ -38,7 +38,7 @@ Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. The test statistic is defined as
 
 Under H0 the distribution of the test statistic is free and is equivalent to
 the same test statistic computed for two independent continuous uniform variables in [0,1],
-where the supremum is taken for t1,t2 on [0,1]. Using this result, the distribution of the test
+where the supremum is taken for t1,t2 in [0,1]. Using this result, the distribution of the test
 statistic is obtained using Monte-Carlo simulations. The user can either use the argument simu=TRUE to
 perform the Monte-Carlo simulation (with N the number of replications) or simply use the available tables
 by choosing simu=FALSE. In the latter case, the exact distribution is computed for n=1, ...,150. For 151<=n<=175, the
